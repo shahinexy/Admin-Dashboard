@@ -2,6 +2,10 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
+import ListComponent from '../views/ui/ListGroup';
+import BasicTable from '../views/tables/TableBasic';
+import Tables from '../views/ui/Tables';
+import CustomReactTable from '../views/tables/CustomReactTable';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
@@ -29,6 +33,7 @@ const ThemeRoutes = [
       { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
       { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
       { path: '/test', name: 'Test', exact: true, element: <Test /> },
+      { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <Tables/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
       // { path: '/dashboards/modern', name: 'Modern', exact: true, element: <Modern /> },
@@ -58,7 +63,6 @@ const ThemeRoutes = [
       // { path: '/ui/dropdown', name: 'dropdown', exact: true, element: <Dropdowns /> },
       // { path: '/ui/button-group', name: 'button group', exact: true, element: <BtnGroup /> },
       // { path: '/ui/collapse', name: 'collapse', exact: true, element: <Collapse /> },
-      // { path: '/ui/list-group', name: 'list-group', exact: true, element: <ListGroup /> },
       // { path: '/ui/modal', name: 'modal', exact: true, element: <Modal /> },
       // { path: '/ui/navbar', name: 'navbar', exact: true, element: <Navbar /> },
       // { path: '/ui/nav', name: 'nav', exact: true, element: <Nav /> },

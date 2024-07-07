@@ -17,6 +17,13 @@ const SidebarData = [
         icon: <Icon.Disc />,
         id: 1.1,
         collapisble: false,
+      },
+      {
+        title: 'Order List',
+        href: '/dashboards/order-list',
+        icon: <Icon.Disc />,
+        id: 1.1,
+        collapisble: false,
       }
       
     ],
