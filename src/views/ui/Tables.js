@@ -1,18 +1,13 @@
+import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes';
+import { Button } from 'bootstrap';
+import { Link } from 'react-router-dom';
 import { Row, Col, Table, Card, CardTitle, CardBody } from 'reactstrap';
 // import ProjectTables from '../../components/dashboard/extraDashboard/ProjectTable';
 
 const Tables = () => {
+  const arr = [1, 2, 3, 4, 5];
   return (
     <Row>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-1*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Col lg="12">
-        {/* <ProjectTables /> */}
-      </Col>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-2*/}
-      {/* --------------------------------------------------------------------------------*/}
       <Col lg="12">
         <Card>
           <CardTitle tag="h4" className="border-bottom p-3 mb-0">
@@ -32,48 +27,22 @@ const Tables = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {arr.map((idx) => (
+                  <tr key={idx}>
                   <th scope="row">#25412</th>
                   <td>John Smith</td>
                   <td>PayPal</td>
                   <td>7 jul 2024</td>
                   <td>Delivered</td>
                   <td>$110</td>
-                  <td>....</td>
+                  <td><Link to={`/${idx}`} className="btn btn-primary" type="submit">Edit</Link></td>
                 </tr>
-                <tr>
-                  <th scope="row">#25412</th>
-                  <td>John Smith</td>
-                  <td>PayPal</td>
-                  <td>7 jul 2024</td>
-                  <td>Delivered</td>
-                  <td>$110</td>
-                  <td>....</td>
-                </tr>
-                <tr>
-                  <th scope="row">#25412</th>
-                  <td>John Smith</td>
-                  <td>PayPal</td>
-                  <td>7 jul 2024</td>
-                  <td>Delivered</td>
-                  <td>$110</td>
-                  <td>....</td>
-                </tr>
-                <tr>
-                  <th scope="row">#25412</th>
-                  <td>John Smith</td>
-                  <td>PayPal</td>
-                  <td>7 jul 2024</td>
-                  <td>Delivered</td>
-                  <td>$110</td>
-                  <td>....</td>
-                </tr>
+                ))}
               </tbody>
             </Table>
           </CardBody>
         </Card>
       </Col>
-      
     </Row>
   );
 };
