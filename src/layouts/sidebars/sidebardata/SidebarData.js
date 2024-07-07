@@ -17,8 +17,15 @@ const SidebarData = [
         icon: <Icon.Disc />,
         id: 1.1,
         collapisble: false,
+      },
+      {
+        title: 'All Product',
+        href: '/tables/all-product',
+        icon: <Icon.Disc />,
+        id: 1.1,
+        collapisble: false,
       }
-      
+
     ],
   },
 
@@ -46,8 +53,8 @@ const SidebarData = [
     href: '/test',
     icon: <Icon.Bluetooth />,
   },
-// start
-  
+  // start
+
 ];
 
 export default SidebarData;

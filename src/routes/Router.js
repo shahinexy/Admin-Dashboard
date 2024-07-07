@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
+import BasicTable from '../views/tables/TableBasic';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
@@ -85,12 +86,12 @@ const ThemeRoutes = [
       // { path: '/form-editor', name: 'form-editor', exact: true, element: <FormEditor /> },
 
       // { path: '/tables/basic-table', name: 'basic-table', exact: true, element: <Basictable /> },
-      // {
-      //   path: '/tables/react-table',
-      //   name: 'react-table',
-      //   exact: true,
-      //   element: <CustomReactTable />,
-      // },
+      {
+        path: '/tables/all-product',
+        name: 'react-table',
+        exact: true,
+        element: <BasicTable />,
+      },
       // {
       //   path: '/tables/data-table',
       //   name: 'data-table',
