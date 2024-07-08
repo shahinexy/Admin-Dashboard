@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Nav,
@@ -7,6 +7,7 @@ import {
   DropdownToggle,
   DropdownMenu,
 } from 'reactstrap';
+import axios from 'axios';
 import { User, FileText, Star, Settings, Droplet } from 'react-feather';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,10 +19,15 @@ import NavItemContainer from './NavItemContainer';
 import NavSubMenu from './NavSubMenu';
 
 import user1 from '../../../assets/images/users/user4.jpg';
+import { useUserContext } from '../../../userContext/userContext';
+
 
 const Sidebar = () => {
   const location = useLocation();
   const currentURL = location.pathname.split('/').slice(0, -1).join('/');
+  const [users,setUsers] = useState([]);
+  const { email, updateEmail } = useUserContext();
+  console.log(email);
 
   //const [collapsed, setCollapsed] = useState(null);
   // const toggle = (index) => {
@@ -32,12 +38,25 @@ const Sidebar = () => {
   const isFixed = useSelector((state) => state.customizer.isSidebarFixed);
   const dispatch = useDispatch();
 
+  useEffect(async()=>{
+    const userData = await axios.get('https://theme-store-server.vercel.app/api/v1/users');
+    setUsers(userData?.data?.data);
+  },[])
+  console.log(users);
+
+  const userInfo = users.filter(user=>user?.email === email);
+  console.log(userInfo);
+  // users.forEach(user=>{
+  //   console.log(user?.email);
+  // })
+
+
   return (
     <div className={`sidebarBox shadow bg-${activeBg} ${isFixed ? 'fixedSidebar' : ''}`}>
       <SimpleBar style={{ height: '100%' }}>
         {/********Logo*******/}
         <div className="d-flex p-3 align-items-center">
-          <Logo />
+          <h3 className='fs-2 fw-semibold text-center'>Shopify Theme Store</h3>
           <Button
             close
             size="sm"
@@ -50,7 +69,7 @@ const Sidebar = () => {
           <img src={user1} alt="John Deo" width={60} className="rounded-circle mb-2" />
           <UncontrolledDropdown>
             <DropdownToggle caret className="bg-transparent border-0">
-              John Deo
+              Jon
             </DropdownToggle>
             <DropdownMenu className='w-100 border'>
               <DropdownItem className="px-4 py-3">

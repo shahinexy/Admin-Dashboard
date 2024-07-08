@@ -1,17 +1,18 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ThemeRoutes from './routes/Router';
+import Themeroutes from './routes/Router';
 import ThemeSelector from './layouts/theme/ThemeSelector';
 import Loader from './layouts/loader/Loader';
+import { UserProvider } from './userContext/userContext';
 
 const App = () => {
-  const routing = useRoutes(ThemeRoutes);
+  const routing = useRoutes(Themeroutes);
   const direction = useSelector((state) => state.customizer.isRTL);
   const isMode = useSelector((state) => state.customizer.isDark);
 
   return (
-    <Suspense fallback={<Loader />}>
+    <UserProvider>
       <div
         className={`${direction ? 'rtl' : 'ltr'} ${isMode ? 'dark' : ''}`}
         dir={direction ? 'rtl' : 'ltr'}
@@ -19,7 +20,7 @@ const App = () => {
         <ThemeSelector />
         {routing}
       </div>
-    </Suspense>
+    </UserProvider>
   );
 };
 
