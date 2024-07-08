@@ -9,6 +9,8 @@ import BasicTable from '../views/tables/TableBasic';
 import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
 import ConditionalRoute from './ConditionalRoute';
+import AddProduct from '../views/ui/AddProduct';
+// import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
@@ -37,7 +39,6 @@ const ThemeRoutes = [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
       { path: '/dashboards/minimal', name: 'Minimal', exact: true, element:<PrivateRoutes element={Minimal}/>},
       { path: '/dashboards/shop', name: 'Shop', exact: true, element: <PrivateRoutes element={Shop}/> },
-      { path: '/test', name: 'Test', exact: true, element: <Test /> },
       { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <PrivateRoutes element={Tables}/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
@@ -79,7 +80,7 @@ const ThemeRoutes = [
       // { path: '/ui/toasts', name: 'toasts', exact: true, element: <Toasts /> },
       // { path: '/ui/tooltip', name: 'tooltip', exact: true, element: <Tooltip /> },
       // { path: '/form-layout/form-basic', name: 'form-basic', exact: true, element: <FormBasic /> },
-      // { path: '/form-layout/form-grid', name: 'form-grid', exact: true, element: <FormGrid /> },
+      // { path: ' ', name: 'form-grid', exact: true, element: <FormGrids /> },
       // { path: '/form-layout/form-group', name: 'form-group', exact: true, element: <FormGroup /> },
       // { path: '/form-layout/form-input', name: 'form-input', exact: true, element: <FormInput /> },
       // {
@@ -94,12 +95,18 @@ const ThemeRoutes = [
       // { path: '/form-editor', name: 'form-editor', exact: true, element: <FormEditor /> },
 
       // { path: '/tables/basic-table', name: 'basic-table', exact: true, element: <Basictable /> },
-      // {
-      //   path: '/tables/react-table',
-      //   name: 'react-table',
-      //   exact: true,
-      //   element: <CustomReactTable />,
-      // },
+      {
+        path: '/tables/all-product',
+        name: 'react-table',
+        exact: true,
+        element: <BasicTable />,
+      },
+      {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
+      },
       // {
       //   path: '/tables/data-table',
       //   name: 'data-table',
