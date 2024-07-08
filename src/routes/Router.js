@@ -9,7 +9,6 @@ import BasicTable from '../views/tables/TableBasic';
 import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
 import ConditionalRoute from './ConditionalRoute';
-import BasicTable from '../views/tables/TableBasic';
 import AddProduct from '../views/ui/AddProduct';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
