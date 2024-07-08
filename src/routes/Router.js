@@ -151,8 +151,8 @@ const ThemeRoutes = [
     children: [
       { path: '404', element: <Error /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
-      { path: 'registerformik', element: <RegisterFormik /> },
-      { path: 'login', element: <ConditionalRoute/> },
+      { path: 'register', element: <RegisterFormik /> },
+      { path: 'login', element: <LoginFormik/> },
       { path: 'maintanance', element: <Maintanance /> },
       { path: 'lockscreen', element: <LockScreen /> },
       { path: 'recoverpwd', element: <RecoverPassword /> },

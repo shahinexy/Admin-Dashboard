@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './store/Store';
 import App from './App';
 import './data';
+import { UserProvider } from './userContext/userContext';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -15,7 +16,9 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </Provider>,
 );

@@ -5,6 +5,8 @@ import { ReactComponent as LogoDarkIcon } from '../../assets/images/logos/elite-
 import LogoDarkText from '../../assets/images/logos/logo-text.png';
 import { ReactComponent as LogoWhiteIcon } from '../../assets/images/logos/elite-white-icon.svg';
 import LogoWhiteText from '../../assets/images/logos/logo-light-text.png';
+import shopifyLogoBlack from "../../assets/images/logos/shopify logo black.png"
+import shopifyLogoGreen from "../../assets/images/logos/shopify logo green.jpg"
 
 const AuthLogo = () => {
   const isDarkMode = useSelector((state) => state.customizer.isDark);
