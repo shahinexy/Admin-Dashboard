@@ -1,11 +1,14 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import PrivateRoutes from './PrivateRoutes';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
 import ListComponent from '../views/ui/ListGroup';
 import BasicTable from '../views/tables/TableBasic';
 import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
+import ConditionalRoute from './ConditionalRoute';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
@@ -24,16 +27,18 @@ const RecoverPassword = Loadable(lazy(() => import('../views/auth/RecoverPasswor
 
 /*****Routes******/
 
+const cookieValue = Cookies.get('AccessToken');
+
 const ThemeRoutes = [
   {
     path: '/',
     element: <FullLayout />,
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
-      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
+      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element:<PrivateRoutes element={Minimal}/>},
+      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <PrivateRoutes element={Shop}/> },
       { path: '/test', name: 'Test', exact: true, element: <Test /> },
-      { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <Tables/> },
+      { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <PrivateRoutes element={Tables}/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
       // { path: '/dashboards/modern', name: 'Modern', exact: true, element: <Modern /> },
@@ -138,7 +143,7 @@ const ThemeRoutes = [
       { path: '404', element: <Error /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
       { path: 'registerformik', element: <RegisterFormik /> },
-      { path: 'loginformik', element: <LoginFormik /> },
+      { path: 'login', element: <ConditionalRoute/> },
       { path: 'maintanance', element: <Maintanance /> },
       { path: 'lockscreen', element: <LockScreen /> },
       { path: 'recoverpwd', element: <RecoverPassword /> },
