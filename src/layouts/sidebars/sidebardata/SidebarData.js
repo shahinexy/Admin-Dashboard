@@ -12,7 +12,7 @@ const SidebarData = [
     collapisble: true,
     children: [
       {
-        title: 'Minimal',
+        title: 'Overview',
         href: '/dashboards/minimal',
         icon: <Icon.Disc />,
         id: 1.1,
@@ -43,30 +43,25 @@ const SidebarData = [
     ],
   },
 
-  {
-    title: 'Ecommerce',
-    href: '/ecom',
-    icon: <Icon.ShoppingCart />,
-    id: 2.7,
-    collapisble: true,
-    children: [
-      {
-        title: 'Shop',
-        href: 'dashboards/shop',
-        icon: <Icon.Disc />,
-      },
-      {
-        title: 'Shop Detail',
-        href: '/ecom/shopdetail',
-        icon: <Icon.Disc />,
-      },
-    ],
-  },
-  {
-    title: 'Test',
-    href: '/test',
-    icon: <Icon.Bluetooth />,
-  },
+  // {
+  //   title: 'Ecommerce',
+  //   href: '/ecom',
+  //   icon: <Icon.ShoppingCart />,
+  //   id: 2.7,
+  //   collapisble: true,
+  //   children: [
+  //     {
+  //       title: 'Shop',
+  //       href: 'dashboards/shop',
+  //       icon: <Icon.Disc />,
+  //     },
+  //     {
+  //       title: 'Shop Detail',
+  //       href: '/ecom/shopdetail',
+  //       icon: <Icon.Disc />,
+  //     },
+  //   ],
+  // },
   // start
 
 ];
