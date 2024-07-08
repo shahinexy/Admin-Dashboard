@@ -20,7 +20,7 @@ const Minimal = () => {
         <Col lg="12">
           <RevenueCards />
         </Col>
-        <Col lg="8">
+        {/* <Col lg="8">
             <YearlySales />
         </Col>
         <Col lg="4">
@@ -49,7 +49,7 @@ const Minimal = () => {
         </Col>
         <Col lg="4" className='d-flex align-items-stretch'>
           <Chat />
-        </Col>
+        </Col> */}
       </Row>
       
     </>
