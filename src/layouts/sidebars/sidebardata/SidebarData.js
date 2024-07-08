@@ -49,6 +49,11 @@ const SidebarData = [
     ],
   },
   {
+    title: 'Add Theme',
+    href: '/addTheme',
+    icon:  <Icon.Box />,
+  },
+  {
     title: 'Test',
     href: '/test',
     icon: <Icon.Bluetooth />,
