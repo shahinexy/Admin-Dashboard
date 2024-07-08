@@ -19,6 +19,13 @@ const SidebarData = [
         collapisble: false,
       },
       {
+        title: 'Order List',
+        href: '/dashboards/order-list',
+        icon: <Icon.Disc />,
+        id: 1.1,
+        collapisble: false,
+      },
+      {
         title: 'Analytical',
         href: '/dashboards/analytical',
         icon: <Icon.Disc />,

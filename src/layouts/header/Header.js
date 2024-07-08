@@ -2,6 +2,8 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import SimpleBar from 'simplebar-react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import {
   Navbar,
   Nav,
@@ -24,10 +26,17 @@ import { ToggleMiniSidebar, ToggleMobileSidebar } from '../../store/customizer/C
 import ProfileDD from './ProfileDD';
 import Logo from '../logo/Logo';
 
+
 const Header = () => {
   const isDarkMode = useSelector((state) => state.customizer.isDark);
   const topbarColor = useSelector((state) => state.customizer.topbarBg);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove('AccessToken');
+    navigate('/auth/login');
+  };
 
   return (
     <Navbar
@@ -65,7 +74,6 @@ const Header = () => {
       {/******************************/}
 
       <Nav className="me-auto d-none d-lg-flex" navbar>
-
         <NavItem className="app-search ps-3">
           <Input
             id="txt-srch"
@@ -145,7 +153,7 @@ const Header = () => {
           <DropdownMenu className="ddWidth">
             <ProfileDD />
             <div className="p-2 px-3">
-              <Button color="danger" size="sm">
+              <Button onClick={handleLogout} color="danger" size="sm">
                 Logout
               </Button>
             </div>
