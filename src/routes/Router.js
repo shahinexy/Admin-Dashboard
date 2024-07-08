@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
 import BasicTable from '../views/tables/TableBasic';
+import AddProduct from '../views/ui/AddProduct';
+// import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
@@ -71,7 +73,7 @@ const ThemeRoutes = [
       // { path: '/ui/toasts', name: 'toasts', exact: true, element: <Toasts /> },
       // { path: '/ui/tooltip', name: 'tooltip', exact: true, element: <Tooltip /> },
       // { path: '/form-layout/form-basic', name: 'form-basic', exact: true, element: <FormBasic /> },
-      // { path: '/form-layout/form-grid', name: 'form-grid', exact: true, element: <FormGrid /> },
+      // { path: ' ', name: 'form-grid', exact: true, element: <FormGrids /> },
       // { path: '/form-layout/form-group', name: 'form-group', exact: true, element: <FormGroup /> },
       // { path: '/form-layout/form-input', name: 'form-input', exact: true, element: <FormInput /> },
       // {
@@ -91,6 +93,12 @@ const ThemeRoutes = [
         name: 'react-table',
         exact: true,
         element: <BasicTable />,
+      },
+      {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
       },
       // {
       //   path: '/tables/data-table',
