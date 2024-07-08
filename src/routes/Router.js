@@ -39,7 +39,6 @@ const ThemeRoutes = [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
       { path: '/dashboards/minimal', name: 'Minimal', exact: true, element:<PrivateRoutes element={Minimal}/>},
       { path: '/dashboards/shop', name: 'Shop', exact: true, element: <PrivateRoutes element={Shop}/> },
-      { path: '/test', name: 'Test', exact: true, element: <Test /> },
       { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <PrivateRoutes element={Tables}/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
