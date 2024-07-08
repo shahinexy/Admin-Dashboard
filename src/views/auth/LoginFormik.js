@@ -1,14 +1,20 @@
 import React from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { Button, Label, FormGroup, Container, Row, Col, Card, CardBody, Input } from 'reactstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthLogo from "../../layouts/logo/AuthLogo";
+import AuthLogo from '../../layouts/logo/AuthLogo';
 import { ReactComponent as LeftBg } from '../../assets/images/bg/login-bgleft.svg';
 import { ReactComponent as RightBg } from '../../assets/images/bg/login-bg-right.svg';
+import { useUserContext } from '../../userContext/userContext';
+import shopifyImageBlack from "../../assets/images/logos/shopify logo black.png";
 
 const LoginFormik = () => {
   const navigate = useNavigate();
+  const { email, updateEmail } = useUserContext(); // Accessing email and updateEmail from context
+  // console.log(email);
 
   const initialValues = {
     email: '',
@@ -21,6 +27,33 @@ const LoginFormik = () => {
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
   });
+
+  const handleLogin = async (data) => {
+    console.log(data);
+
+    try {
+      const response = await axios.post(
+        'https://theme-store-server.vercel.app/api/v1/auth/login',
+        data,
+      );
+
+      // Handle the response as needed
+      console.log('Login successful:', response.data.data.accessToken);
+      if (response.data.data.accessToken) {
+        Cookies.set('AccessToken', response.data.data.accessToken, { expires: 3600 });
+        updateEmail(data.email); // Update email in context
+        navigate('/dashboards/minimal');
+      }
+      // For example, save the token and redirect
+      localStorage.setItem('token', response.data.token);
+      // Redirect to a protected route
+      // window.location.href = '/dashboard';
+    } catch (error) {
+      // Handle error
+      console.error('Login failed:', error);
+      // setError('Login failed. Please check your credentials and try again.');
+    }
+  };
 
   return (
     <div className="loginBox">
@@ -40,11 +73,9 @@ const LoginFormik = () => {
                   initialValues={initialValues}
                   validationSchema={validationSchema}
                   onSubmit={(fields) => {
-                    // eslint-disable-next-line no-alert
-                    alert(`SUCCESS!! :-)\n\n${JSON.stringify(fields, null, 4)}`);
-                    navigate('/');
+                    handleLogin(fields);
                   }}
-                  render={({ errors, touched }) => (
+                  render={({ errors, touched, setFieldValue }) => (
                     <Form>
                       <FormGroup>
                         <Label htmlFor="email">Email</Label>
@@ -54,6 +85,10 @@ const LoginFormik = () => {
                           className={`form-control${
                             errors.email && touched.email ? ' is-invalid' : ''
                           }`}
+                          onChange={(e) => {
+                            setFieldValue('email', e.target.value);
+                            updateEmail(e.target.value); // Update email in context
+                          }}
                         />
                         <ErrorMessage name="email" component="div" className="invalid-feedback" />
                       </FormGroup>

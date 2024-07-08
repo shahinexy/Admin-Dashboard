@@ -1,18 +1,13 @@
+import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes';
+import { Button } from 'bootstrap';
+import { Link } from 'react-router-dom';
 import { Row, Col, Table, Card, CardTitle, CardBody } from 'reactstrap';
-import ProjectTables from '../../components/dashboard/extraDashboard/ProjectTable';
+// import ProjectTables from '../../components/dashboard/extraDashboard/ProjectTable';
 
 const Tables = () => {
+  const arr = [1, 2, 3, 4, 5];
   return (
     <Row>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-1*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Col lg="12">
-        <ProjectTables />
-      </Col>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-2*/}
-      {/* --------------------------------------------------------------------------------*/}
       <Col lg="12">
         <Card>
           <CardTitle tag="h4" className="border-bottom p-3 mb-0">
@@ -22,115 +17,27 @@ const Tables = () => {
             <Table bordered>
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th>Order ID</th>
+                  <th>Customer Name</th>
+                  <th>Payment Method</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                {arr.map((idx) => (
+                  <tr key={idx}>
+                  <th scope="row">#25412</th>
+                  <td>John Smith</td>
+                  <td>PayPal</td>
+                  <td>7 jul 2024</td>
+                  <td>Delivered</td>
+                  <td>$110</td>
+                  <td><Link to={`/${idx}`} className="btn btn-primary" type="submit">Edit</Link></td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
-          </CardBody>
-        </Card>
-      </Col>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-3*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Col lg="12">
-        <Card>
-          <CardTitle tag="h4" className="border-bottom p-3 mb-0">
-            Table with Striped
-          </CardTitle>
-          <CardBody className="">
-            <Table bordered striped>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
-          </CardBody>
-        </Card>
-      </Col>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* table-3*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Col lg="12">
-        <Card>
-          <CardTitle tag="h4" className="border-bottom p-3 mb-0">
-            Table with Hover
-          </CardTitle>
-          <CardBody className="">
-            <Table bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                ))}
               </tbody>
             </Table>
           </CardBody>
