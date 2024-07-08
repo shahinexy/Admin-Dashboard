@@ -56,52 +56,52 @@ const tableData = [
 const ProjectTables = () => {
   return (
     <div>
-      
-          <Table className="no-wrap align-middle" responsive borderless>
-            <thead>
-              <tr>
-                <th className='px-4'>Team Lead</th>
-                <th className='px-4'>Project</th>
 
-                <th className='px-4'>Status</th>
-                <th className='px-4'>Weeks</th>
-                <th className='px-4'>Budget</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map((tdata) => (
-                <tr key={tdata.name} className="border-top">
-                  <td>
-                    <div className="d-flex align-items-center p-2">
-                      <img
-                        src={tdata.avatar}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width="45"
-                        height="45"
-                      />
-                      <div className="ms-3">
-                        <h5 className="mb-0 fw-medium">{tdata.name}</h5>
-                        <span className="text-muted">{tdata.email}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{tdata.project}</td>
-                  <td>
-                    {tdata.status === 'pending' ? (
-                      <span className="p-2 bg-danger rounded-circle d-inline-block ms-3" />
-                    ) : tdata.status === 'holt' ? (
-                      <span className="p-2 bg-warning rounded-circle d-inline-block ms-3" />
-                    ) : (
-                      <span className="p-2 bg-success rounded-circle d-inline-block ms-3" />
-                    )}
-                  </td>
-                  <td>{tdata.weeks}</td>
-                  <td>{tdata.budget}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+      <Table className="no-wrap align-middle" responsive borderless>
+        <thead>
+          <tr>
+            <th className='px-4'>Image</th>
+            <th className='px-4'>Name</th>
+
+            <th className='px-4'>Price</th>
+            <th className='px-4'>Review</th>
+            <th className='px-4'>Total Sale</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((tdata) => (
+            <tr key={tdata.name} className="border-top">
+              <td>
+                <div className="d-flex align-items-center p-2">
+                  <img
+                    src={tdata.avatar}
+                    className="rounded-circle"
+                    alt="avatar"
+                    width="45"
+                    height="45"
+                  />
+                  <div className="ms-3">
+                    <h5 className="mb-0 fw-medium">{tdata.name}</h5>
+                    <span className="text-muted">{tdata.email}</span>
+                  </div>
+                </div>
+              </td>
+              <td>{tdata.project}</td>
+              <td>
+                {tdata.status === 'pending' ? (
+                  <span className="p-2 bg-danger rounded-circle d-inline-block ms-3" />
+                ) : tdata.status === 'holt' ? (
+                  <span className="p-2 bg-warning rounded-circle d-inline-block ms-3" />
+                ) : (
+                  <span className="p-2 bg-success rounded-circle d-inline-block ms-3" />
+                )}
+              </td>
+              <td>{tdata.weeks}</td>
+              <td>{tdata.budget}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };

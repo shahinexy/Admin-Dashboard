@@ -19,13 +19,32 @@ const SidebarData = [
         collapisble: false,
       },
       {
+<<<<<<< HEAD
+        title: 'Order List',
+        href: '/dashboards/order-list',
+=======
+        title: 'All Product',
+        href: '/tables/all-product',
+>>>>>>> 08af5ed092d85310e3747b07e9c34929b1d90351
+        icon: <Icon.Disc />,
+        id: 1.1,
+        collapisble: false,
+      },
+      {
+        title: 'All Product',
+        href: '/tables/all-product',
+        icon: <Icon.Disc />,
+        id: 1.1,
+        collapisble: false,
+      },
+      {
         title: 'Order List',
         href: '/dashboards/order-list',
         icon: <Icon.Disc />,
         id: 1.1,
         collapisble: false,
       }
-      
+
     ],
   },
 
@@ -53,8 +72,8 @@ const SidebarData = [
     href: '/test',
     icon: <Icon.Bluetooth />,
   },
-// start
-  
+  // start
+
 ];
 
 export default SidebarData;

@@ -86,7 +86,7 @@ const CustomReactTable = () => {
   });
   return (
     <div>
-      
+
       <Modal isOpen={modal} toggle={toggle.bind(null)}>
         <ModalHeader toggle={toggle.bind(null)}>Modal title</ModalHeader>
         <ModalBody>
