@@ -39,9 +39,10 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element:<PrivateRoutes element={Minimal}/>},
-      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <PrivateRoutes element={Shop}/> },
-      { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <PrivateRoutes element={Tables}/> },
+      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
+      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
+      { path: '/test', name: 'Test', exact: true, element: <Test /> },
+      { path: '/addTheme', name: 'addTheme', exact: true, element: <PrivateRoutes element={AddProduct}/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
       // { path: '/dashboards/modern', name: 'Modern', exact: true, element: <Modern /> },
