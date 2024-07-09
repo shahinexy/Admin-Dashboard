@@ -34,7 +34,7 @@ const SidebarData = [
       },
       {
         title: 'Add Theme',
-        href: '/add-theme/add',
+        href: '/addTheme',
         icon: <Icon.Disc />,
         id: 1.1,
         collapisble: false,
