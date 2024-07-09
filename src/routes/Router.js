@@ -10,6 +10,8 @@ import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
 import ConditionalRoute from './ConditionalRoute';
 import AddProduct from '../views/ui/AddProduct';
+import UploadImage from '../views/ui/UploadImage';
+import ThemeDetails from '../[ThemeDetails]/page';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
@@ -102,12 +104,24 @@ const ThemeRoutes = [
         exact: true,
         element: <BasicTable />,
       },
-      // {
-      //   path: '/add-theme/add',
-      //   name: 'add-theme',
-      //   exact: true,
-      //   element: <AddProduct />,
-      // },
+      {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
+      },
+      {
+        path: '/upload/image',
+        name: 'upload image',
+        exact: true,
+        element: <UploadImage></UploadImage>
+      },
+      {
+        path: '/theme/details/:id',
+        name: 'upload image',
+        exact: true,
+        element: <ThemeDetails></ThemeDetails>
+      },
       // {
       //   path: '/tables/data-table',
       //   name: 'data-table',
