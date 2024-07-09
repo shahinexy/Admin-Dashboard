@@ -1,12 +1,36 @@
-import React, { useRef, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useRef, useState } from 'react';
+import Cookies from 'js-cookie';
 import { Button, Input, Label } from 'reactstrap';
 import 'react-quill/dist/quill.snow.css';
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useSecureApi';
+import usePostMutate from '../../hooks/shared/usePostMutate';
 
 const AddProduct = () => {
-  const axiosSecure = useAxiosSecure()
+  const [user, setUser] = useState({})
+  const axiosSecure = useAxiosSecure();
+  const cookieValue = Cookies.get('AccessToken');
+  const onSuccess = (response) => {
+    console.log('Success:', response);
+  };
+  const onError = (error) => {
+    console.error('Error:', error);
+  };
+
+  useEffect(() => {
+
+    if (cookieValue) {
+      console.log(cookieValue)
+      const decoded = jwtDecode(cookieValue);
+      console.log(decoded)
+      setUser(decoded)
+      
+    }
+  }, [cookieValue]);
+
+  const {mutate, isPending} = usePostMutate('/themes', onSuccess, onError)
   const {
     register,
     handleSubmit,
@@ -45,10 +69,9 @@ const AddProduct = () => {
   };
   // on form submit
   const onSubmit = async (data) => {
-    // https://theme-store-server.vercel.app/api/v1/themes
-    const { includesSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
+    const { includeSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
 
-    const supports = includesSupport.split(',');
+    const supports = includeSupport.split(',');
     const allCategory = categories.split(',');
 
     const desktopImage = data.featuredDesktopImage;
@@ -61,20 +84,13 @@ const AddProduct = () => {
       ...rest,
       featuredDesktopImage: featuredDesktopImageUrl,
       featuredPhoneImage: featuredPhoneImageUrl,
-      includesSupport: supports,
+      includeSupport: supports,
       categories: allCategory,
-    };
+      createdBy: user.id
 
-    try {
-      const response = await axiosSecure.post('/themes', allData);
-      console.log(response.data);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.error('Unauthorized: Please check your authentication token.');
-      } else {
-        console.error(error);
-      }
-    }
+    };
+    mutate(allData)
+    console.log(allData);
 
   };
 
@@ -165,12 +181,24 @@ const AddProduct = () => {
           />
 
           <Controller
-            name="includesSupport"
+            name="includeSupport"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <div className="mb-3">
                 <Label for="themePrice">Includes Support</Label>
+                <Input {...field} placeholder="Give theme support" type="text" />
+              </div>
+            )}
+          />
+
+          <Controller
+            name="author"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themePrice">Author</Label>
                 <Input {...field} placeholder="Give theme support" type="text" />
               </div>
             )}
