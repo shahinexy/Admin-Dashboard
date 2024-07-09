@@ -105,6 +105,12 @@ const ThemeRoutes = [
         element: <BasicTable />,
       },
       {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
+      },
+      {
         path: '/dashboards/order-list',
         name: 'react-table',
         exact: true,

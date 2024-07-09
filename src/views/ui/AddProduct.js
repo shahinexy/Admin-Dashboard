@@ -3,8 +3,10 @@ import { Button, Input, Label } from 'reactstrap';
 import 'react-quill/dist/quill.snow.css';
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useSecureApi';
 
 const AddProduct = () => {
+  const axiosSecure = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -41,10 +43,9 @@ const AddProduct = () => {
     }
     return null;
   };
-
   // on form submit
   const onSubmit = async (data) => {
- 
+    // https://theme-store-server.vercel.app/api/v1/themes
     const { includesSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
 
     const supports = includesSupport.split(',');
@@ -63,7 +64,18 @@ const AddProduct = () => {
       includesSupport: supports,
       categories: allCategory,
     };
-    console.log(allData);
+
+    try {
+      const response = await axiosSecure.post('/themes', allData);
+      console.log(response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.error('Unauthorized: Please check your authentication token.');
+      } else {
+        console.error(error);
+      }
+    }
+
   };
 
   // get img file value
