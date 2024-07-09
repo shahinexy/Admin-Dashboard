@@ -1,12 +1,15 @@
 import { Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import user1 from '../../../assets/images/users/user1.jpg';
 import user2 from '../../../assets/images/users/user2.jpg';
 import user3 from '../../../assets/images/users/user3.jpg';
 import user4 from '../../../assets/images/users/user4.jpg';
 import user5 from '../../../assets/images/users/user5.jpg';
 
+
 const tableData = [
   {
+    id:1,
     avatar: user1,
     name: 'Hanna Gover',
     email: 'hgover@gmail.com',
@@ -16,6 +19,7 @@ const tableData = [
     budget: '95K',
   },
   {
+    id:2,
     avatar: user2,
     name: 'Jonathan Gover',
     email: 'hgover@gmail.com',
@@ -25,6 +29,7 @@ const tableData = [
     budget: '95K',
   },
   {
+    id:3,
     avatar: user3,
     name: 'Steave',
     email: 'hgover@gmail.com',
@@ -34,6 +39,7 @@ const tableData = [
     budget: '95K',
   },
   {
+    id:4,
     avatar: user4,
     name: 'Mukesh chava',
     email: 'hgover@gmail.com',
@@ -43,6 +49,7 @@ const tableData = [
     budget: '95K',
   },
   {
+    id:5,
     avatar: user5,
     name: 'Thuklk luu',
     email: 'hgover@gmail.com',
@@ -56,36 +63,37 @@ const tableData = [
 const ProjectTables = () => {
   return (
     <div>
-
       <Table className="no-wrap align-middle" responsive borderless>
         <thead>
           <tr>
-            <th className='px-4'>Image</th>
-            <th className='px-4'>Name</th>
+            <th className="px-4">Image</th>
+            <th className="px-4">Name</th>
 
-            <th className='px-4'>Price</th>
-            <th className='px-4'>Review</th>
-            <th className='px-4'>Total Sale</th>
+            <th className="px-4">Price</th>
+            <th className="px-4">Review</th>
+            <th className="px-4">Total Sale</th>
           </tr>
         </thead>
         <tbody>
           {tableData.map((tdata) => (
             <tr key={tdata.name} className="border-top">
-              <td>
-                <div className="d-flex align-items-center p-2">
-                  <img
-                    src={tdata.avatar}
-                    className="rounded-circle"
-                    alt="avatar"
-                    width="45"
-                    height="45"
-                  />
-                  <div className="ms-3">
-                    <h5 className="mb-0 fw-medium">{tdata.name}</h5>
-                    <span className="text-muted">{tdata.email}</span>
+              <Link to={`/theme/details/${tdata.id}`}>
+                <td>
+                  <div className="d-flex align-items-center p-2">
+                    <img
+                      src={tdata.avatar}
+                      className="rounded-circle"
+                      alt="avatar"
+                      width="45"
+                      height="45"
+                    />
+                    <div className="ms-3">
+                      <h5 className="mb-0 fw-medium">{tdata.name}</h5>
+                      <span className="text-muted">{tdata.email}</span>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
+              </Link>
               <td>{tdata.project}</td>
               <td>
                 {tdata.status === 'pending' ? (
