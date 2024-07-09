@@ -25,6 +25,10 @@ import WeatherCard from '../components/dashboard/minimalDashboard/WeatherCard';
 import MonthlyTarget from '../components/dashboard/modernDashboard/MonthlyTarget';
 import UserActivity from '../components/dashboard/modernDashboard/UserActivity';
 import ThreeColumn from '../components/threeColumn/ThreeColumn';
+import ComponentCard from '../components/ComponentCard';
+import Customizer from '../layouts/customizer/Customizer';
+import Shop from '../views/apps/ecommerce/Shop';
+import ShopDetail from '../views/apps/ecommerce/ShopDetail';
 
 const tableData = [
     {
@@ -87,9 +91,7 @@ const ThemeDetails = () => {
     console.log(id);
     return (
         <div>
-           {/* <ShopListing></ShopListing> */}
-
-           
+            <ShopDetail></ShopDetail>
         </div>
     );
 };
