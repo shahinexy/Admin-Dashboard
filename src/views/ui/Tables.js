@@ -1,5 +1,4 @@
-import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes';
-import { Button } from 'bootstrap';
+
 import { Link } from 'react-router-dom';
 import { Row, Col, Table, Card, CardTitle, CardBody } from 'reactstrap';
 // import ProjectTables from '../../components/dashboard/extraDashboard/ProjectTable';
@@ -11,7 +10,7 @@ const Tables = () => {
       <Col lg="12">
         <Card>
           <CardTitle tag="h4" className="border-bottom p-3 mb-0">
-            Table with Border
+            Order List
           </CardTitle>
           <CardBody className="">
             <Table bordered>
