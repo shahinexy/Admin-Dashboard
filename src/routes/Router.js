@@ -104,12 +104,18 @@ const ThemeRoutes = [
         exact: true,
         element: <BasicTable />,
       },
-      // {
-      //   path: '/add-theme/add',
-      //   name: 'add-theme',
-      //   exact: true,
-      //   element: <AddProduct />,
-      // },
+      {
+        path: '/dashboards/order-list',
+        name: 'react-table',
+        exact: true,
+        element: <Tables/>,
+      },
+      {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
+      },
       {
         path: '/upload/image',
         name: 'upload image',

@@ -19,7 +19,9 @@ const LoginFormik = () => {
   }
   const onSuccess = (data)=> {
     navigate('/dashboards/minimal');
-    Cookies.set('AccessToken', data.data.accessToken, { expires: 3600 });
+    // console.log(data);
+    // console.log(data.data.data.accessToken);
+    Cookies.set('AccessToken', data.data.data.accessToken, { expires: 3600 });
     console.log(data, "from login page")
   }
   const {mutate, isPending, } = usePostMutate('/auth/login',onSuccess, handleError )
