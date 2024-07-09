@@ -1,148 +1,184 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from 'react';
 import { Button, Input, Label } from 'reactstrap';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Controller, useForm, } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
 
 const AddProduct = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-    const { register, handleSubmit, watch, control, setValue, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data.featuredDesktopImage.name)
-        // console.log(data.featuredDesktopImage)
-        const desktopImg = { image: data.featuredDesktopImage.name };
-        // console.log(desktopImg)
-        axios.post(`https://api.imgbb.com/1/upload?key=4cfa07d6576a9464f924700ef4bab850}`, desktopImg , {
+  // upload photo om cloudinary
+  const uploadImage = async (file) => {
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'images_preset');
+
+      try {
+        const response = await axios.post(
+          `https://api.cloudinary.com/v1_1/dwhvo770r/upload`,
+          formData,
+          {
             headers: {
-                "content-type": "multipart/form-data",
-              },
-        })
-        .then(res => console.log(res))
+              'Content-Type': 'multipart/form-data',
+            },
+          },
+        );
+
+        console.log(response.data.secure_url, 'uploaded in cloudinary');
+
+        return response.data.secure_url;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    return null;
+  };
+
+  // on form submit
+  const onSubmit = async (data) => {
+ 
+    const { includesSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
+
+    const supports = includesSupport.split(',');
+    const allCategory = categories.split(',');
+
+    const desktopImage = data.featuredDesktopImage;
+    const phoneImage = data.featuredPhoneImage;
+
+    const featuredDesktopImageUrl = await uploadImage(desktopImage);
+    const featuredPhoneImageUrl = await uploadImage(phoneImage);
+
+    const allData = {
+      ...rest,
+      featuredDesktopImage: featuredDesktopImageUrl,
+      featuredPhoneImage: featuredPhoneImageUrl,
+      includesSupport: supports,
+      categories: allCategory,
     };
-    const featuredDesktopImage = useRef(null);
+    console.log(allData);
+  };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setValue('featuredDesktopImage', event.target.files[0]);
-        console.log('Selected file:', file);
-    };
+  // get img file value
+  const featuredDesktopImage = useRef(null);
+  const featuredPhoneImage = useRef(null);
 
-    return (
-        <div className=''>
-            <h2 className="text-3xl font-bold mb-5">Upload your Theme</h2>
-            <div className="border-2 border-gray-400 rounded-xl p-7">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Controller
-                        name="name"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <div className="mb-3">
-                            <div >
-                                Theme Name
-                            </div>
-                            <Input
-                                {...field}
-                                placeholder="Write your theme Name"
-                                type="text"
-                            />
-                        </div>}
-                    />
-                    
-                    <Label for="themeName">
-                                Theme Desktop Image
-                            </Label>
-                            <Input
-                               
-                                ref={featuredDesktopImage}
-                                type="file"    onChange={handleFileChange} 
-                            />
-                    <Controller
-                        name="featuredPhoneImage "
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <div className="mb-3">
-                            <Label for="themeName">
-                                Theme Phone Image
-                            </Label>
-                            <Input
-                                {...field}
-                        
-                                placeholder="Write your theme Name"
-                                type="text"
-                            />
-                        </div>}
-                    />
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setValue('featuredDesktopImage', file);
+    console.log('Selected file:', file);
+  };
 
-        
-                    <Controller
-                        name="version"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <div className="mb-3">
-                            <Label for="themeVersion">
-                                Theme Version
-                            </Label>
-                            <Input
-                                {...field}
-                                placeholder="Give Theme Version Here"
-                                type="text"
-                            />
-                        </div>}
-                    />
+  const handlePhoneImg = (event) => {
+    const file = event.target.files[0];
+    setValue('featuredPhoneImage', file);
+    console.log('Selected file:', file);
+  };
 
-                    <Controller
-                        name="price"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <div className="mb-3">
-                            <Label for="themePrice">
-                                Theme Price
-                            </Label>
-                            <Input
-                                {...field}
-                                placeholder="Give theme price here"
-                                type="number"
-                            />
-                        </div>}
-                    />
+  return (
+    <div>
+      <div className="row justify-content-center">
+        <h2 className="text-3xl font-bold mb-5 col-7">Upload your Theme</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="col-7">
+          <Controller
+            name="name"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <div>Theme Name</div>
+                <Input {...field} placeholder="Write your theme Name" type="text" />
+              </div>
+            )}
+          />
 
-                    <Controller
-                        name="IncludesSupport"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <div className="mb-3">
-                            <Label for="themePrice">
-                                Includes Support
-                            </Label>
-                            <Input
-                                {...field}
-                                placeholder="Give theme support"
-                                type="text"
-                            />
-                        </div>}
-                    />
+          <Label for="themeName" className="mb-2">
+            {' '}
+            Desktop Image
+          </Label>
+          <Input
+            ref={featuredDesktopImage}
+            type="file"
+            onChange={handleFileChange}
+            className="mb-2"
+          />
 
-                    <div>Short Description</div>
-                    <Controller
-                        name="description"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => <textarea {...field} rows={4} className='w-100'>
+          <Label for="themeName" className="mb-2">
+            {' '}
+            Phone Image
+          </Label>
+          <Input ref={featuredPhoneImage} type="file" onChange={handlePhoneImg} className="mb-2" />
 
-                        </textarea>}
-                    />
+          <Controller
+            name="categories"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themeName">Categories</Label>
+                <Input {...field} placeholder="Write your theme Name" type="text" />
+              </div>
+            )}
+          />
 
-                    <div className="mt-3">
-                        <Button color="primary">Submit</Button>
-                    </div>
-                </form>
-            </div >
-        </div >
-    );
-}
+          <Controller
+            name="version"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themeVersion">Version</Label>
+                <Input {...field} placeholder="Give Theme Version Here" type="text" />
+              </div>
+            )}
+          />
+
+          <Controller
+            name="price"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themePrice"> Price</Label>
+                <Input {...field} placeholder="Give theme price here" type="number" />
+              </div>
+            )}
+          />
+
+          <Controller
+            name="includesSupport"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themePrice">Includes Support</Label>
+                <Input {...field} placeholder="Give theme support" type="text" />
+              </div>
+            )}
+          />
+
+          <div>Short Description</div>
+          <Controller
+            name="description"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <textarea {...field} rows={4} className="w-100"></textarea>}
+          />
+
+          <div className="mt-3">
+            <Button color="primary">Submit</Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default AddProduct;
