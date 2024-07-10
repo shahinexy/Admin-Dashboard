@@ -12,6 +12,7 @@ import ConditionalRoute from './ConditionalRoute';
 import AddProduct from '../views/ui/AddProduct';
 import UploadImage from '../views/ui/UploadImage';
 import ThemeDetails from '../[ThemeDetails]/page';
+import AllUsers from '../views/AllUsers/AllUsers';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
@@ -133,6 +134,12 @@ const ThemeRoutes = [
         name: 'upload image',
         exact: true,
         element: <ThemeDetails></ThemeDetails>
+      },
+      {
+        path: '/all/users',
+        name: 'all users',
+        exact: true,
+        element: <AllUsers></AllUsers>
       },
       // {
       //   path: '/tables/data-table',

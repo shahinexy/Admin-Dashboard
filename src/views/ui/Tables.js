@@ -22,7 +22,6 @@ const Tables = () => {
                   <th>Date</th>
                   <th>Status</th>
                   <th>Total</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,7 +33,6 @@ const Tables = () => {
                   <td>7 jul 2024</td>
                   <td>Delivered</td>
                   <td>$110</td>
-                  <td><Link to={`/${idx}`} className="btn btn-primary" type="submit">Edit</Link></td>
                 </tr>
                 ))}
               </tbody>

@@ -39,9 +39,16 @@ const SidebarData = [
         id: 1.1,
         collapisble: false,
       },
+      // {
+      //   title: 'Upload Image',
+      //   href: '/upload/image',
+      //   icon: <Icon.Disc />,
+      //   id: 1.1,
+      //   collapisble: false,
+      // },
       {
-        title: 'Upload Image',
-        href: '/upload/image',
+        title: 'All Users',
+        href: '/all/users',
         icon: <Icon.Disc />,
         id: 1.1,
         collapisble: false,
