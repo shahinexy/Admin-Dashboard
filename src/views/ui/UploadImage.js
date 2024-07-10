@@ -1,16 +1,12 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Input, Label } from 'reactstrap';
 // import './style.css';
 
-const UploadImage = ({handleFileChange}) => {
+const ImageUploader = () => {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const fileInput = useRef(null);
-  const featuredDesktopImage = useRef(null);
   const handleFile = (file) => {
     //you can carry out any file validations here...
-    handleFileChange(file);
     setImage(file);
     setPreviewUrl(URL.createObjectURL(file));
   };
@@ -26,10 +22,9 @@ const UploadImage = ({handleFileChange}) => {
     const imageFile = event.dataTransfer.files[0];
     handleFile(imageFile);
   };
-  
   return (
     <div className="flex flex-column">
-      {/* <div
+      <div
         className="drop_zone"
         onDragOver={handleOndragOver}
         onDrop={handleOndrop}
@@ -43,28 +38,7 @@ const UploadImage = ({handleFileChange}) => {
           hidden
           onChange={(e) => handleFile(e.target.files[0])}
         />
-      </div> */}
-
-      <Label
-        for="themeName"
-        className="mb-2"
-        onDragOver={handleOndragOver}
-        onDrop={handleOndrop}
-        onClick={() => fileInput.current.click()}
-      >
-        {' '}
-        Desktop Image
-      </Label>
-      <Input
-       ref={fileInput}
-        type="file" 
-        accept="image/*"
-        onChange={(e) => handleFile(e.target.files[0])}
-         className="mb-2" 
-         
-         
-         />
-
+      </div>
       <div>
         {previewUrl && (
           <div className="image">
@@ -76,9 +50,4 @@ const UploadImage = ({handleFileChange}) => {
     </div>
   );
 };
-
-UploadImage.propTypes = {
-  handleFileChange : PropTypes.func
-}
-
-export default UploadImage;
+export default ImageUploader;

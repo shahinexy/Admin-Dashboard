@@ -4,7 +4,7 @@ import useAxiosSecure from "../useSecureApi";
 
 const usePostMutate = (route, onSuccess = () => {}, onError = () => {}) => {
   const Axios = useAxiosSecure();
-  const token = Cookies.get("user");
+  const token = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
@@ -15,7 +15,7 @@ const usePostMutate = (route, onSuccess = () => {}, onError = () => {}) => {
         },
       }),
     onSuccess: (mutatedData) => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["AccessToken"] });
 
       console.log(mutatedData);
       onSuccess(mutatedData);
