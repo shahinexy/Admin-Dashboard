@@ -7,11 +7,13 @@ import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useSecureApi';
 import usePostMutate from '../../hooks/shared/usePostMutate';
+import UploadImage from './UploadImage';
 
 const AddProduct = () => {
-  const [user, setUser] = useState({})
-  const axiosSecure = useAxiosSecure();
+  const [user, setUser] = useState({});
   const cookieValue = Cookies.get('AccessToken');
+  const [desktopImageUrl, setDesktopImageUrl] = useState('');
+  const [phoneImageUrl, setPhoneImageUrl] = useState('');
   const onSuccess = (response) => {
     console.log('Success:', response);
   };
@@ -20,17 +22,15 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-
     if (cookieValue) {
-      console.log(cookieValue)
+      console.log(cookieValue);
       const decoded = jwtDecode(cookieValue);
-      console.log(decoded)
-      setUser(decoded)
-      
+      console.log(decoded);
+      setUser(decoded);
     }
   }, [cookieValue]);
 
-  const {mutate, isPending} = usePostMutate('/themes', onSuccess, onError)
+  const { mutate, isPending } = usePostMutate('/themes', onSuccess, onError);
   const {
     register,
     handleSubmit,
@@ -69,13 +69,15 @@ const AddProduct = () => {
   };
   // on form submit
   const onSubmit = async (data) => {
-    const { includeSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
+    const { includeSupport, categories, ...rest } = data;
+
+    // console.log(desktopImageUrl);
 
     const supports = includeSupport.split(',');
     const allCategory = categories.split(',');
 
-    const desktopImage = data.featuredDesktopImage;
-    const phoneImage = data.featuredPhoneImage;
+    const desktopImage = desktopImageUrl;
+    const phoneImage = phoneImageUrl;
 
     const featuredDesktopImageUrl = await uploadImage(desktopImage);
     const featuredPhoneImageUrl = await uploadImage(phoneImage);
@@ -86,29 +88,13 @@ const AddProduct = () => {
       featuredPhoneImage: featuredPhoneImageUrl,
       includeSupport: supports,
       categories: allCategory,
-      createdBy: user.id
-
+      createdBy: user.id,
     };
-    mutate(allData)
+    mutate(allData);
     console.log(allData);
-
   };
 
-  // get img file value
-  const featuredDesktopImage = useRef(null);
-  const featuredPhoneImage = useRef(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setValue('featuredDesktopImage', file);
-    console.log('Selected file:', file);
-  };
-
-  const handlePhoneImg = (event) => {
-    const file = event.target.files[0];
-    setValue('featuredPhoneImage', file);
-    console.log('Selected file:', file);
-  };
 
   return (
     <div>
@@ -126,23 +112,11 @@ const AddProduct = () => {
               </div>
             )}
           />
+          <p>Desktop Image</p>
+          <UploadImage setImageUrl={setDesktopImageUrl} />
 
-          <Label for="themeName" className="mb-2">
-            {' '}
-            Desktop Image
-          </Label>
-          <Input
-            ref={featuredDesktopImage}
-            type="file"
-            onChange={handleFileChange}
-            className="mb-2"
-          />
-
-          <Label for="themeName" className="mb-2">
-            {' '}
-            Phone Image
-          </Label>
-          <Input ref={featuredPhoneImage} type="file" onChange={handlePhoneImg} className="mb-2" />
+          <p>Phone Image</p>
+          <UploadImage setImageUrl={setPhoneImageUrl} />
 
           <Controller
             name="categories"

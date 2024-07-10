@@ -12,7 +12,7 @@ const SidebarData = [
     collapisble: true,
     children: [
       {
-        title: 'Minimal',
+        title: 'Overview',
         href: '/dashboards/minimal',
         icon: <Icon.Disc />,
         id: 1.1,

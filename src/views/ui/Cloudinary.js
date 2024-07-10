@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const cloudinary = {
-    cloud_name:process.env.CLOUD_NAME,
-    api_key:process.env.API_KEY,
-    api_secret:process.env.API_SECRET,
+    cloud_name:process.env.REACT_APP_CLOUD_NAME,
+    api_key:process.env.REACT_APP_API_KEY,
+    api_secret:process.env.REACT_APP_API_SECRET,
   };
 
   // console.log(process.env.CLOUD_NAME);
