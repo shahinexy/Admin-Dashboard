@@ -5,7 +5,7 @@ import ShopDetail from '../views/apps/ecommerce/ShopDetail';
 
 const ThemeDetails = () => {
     const {id} = useParams();
-    console.log(id);
+    console.log(id, "id from page themeDetails");
     return (
         <div>
             <ShopDetail id={id}></ShopDetail>

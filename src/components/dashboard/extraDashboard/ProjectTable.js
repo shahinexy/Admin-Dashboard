@@ -53,8 +53,8 @@ const ProjectTables = () => {
                       src={theme?.featuredDesktopImage}
                       className="rounded-4"
                       alt="avatar"
-                      width="45"
-                      height="45"
+                      width="100"
+                      height="80"
                     />
                     <div className="ms-3">
                       <h5 className="mb-0 fw-medium">{theme?.name}</h5>
