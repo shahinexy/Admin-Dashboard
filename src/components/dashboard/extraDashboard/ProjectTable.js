@@ -3,59 +3,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useSecureApi';
 
-// const tableData = [
-//   {
-//     id: 1,
-//     avatar: theme1,
-//     name: 'Hanna Gover',
-//     email: 'hgover@gmail.com',
-//     project: 'Flexy React',
-//     status: 'pending',
-//     weeks: '35',
-//     budget: '95K',
-//   },
-//   {
-//     id: 2,
-//     avatar: theme2,
-//     name: 'Jonathan Gover',
-//     email: 'hgover@gmail.com',
-//     project: 'Lading pro React',
-//     status: 'done',
-//     weeks: '35',
-//     budget: '95K',
-//   },
-//   {
-//     id: 3,
-//     avatar: theme3,
-//     name: 'Steave',
-//     email: 'hgover@gmail.com',
-//     project: 'Elite React',
-//     status: 'holt',
-//     weeks: '35',
-//     budget: '95K',
-//   },
-//   {
-//     id: 4,
-//     avatar: theme4,
-//     name: 'Mukesh chava',
-//     email: 'hgover@gmail.com',
-//     project: 'Flexy React',
-//     status: 'pending',
-//     weeks: '35',
-//     budget: '95K',
-//   },
-//   {
-//     id: 5,
-//     avatar: theme5,
-//     name: 'Thuklk luu',
-//     email: 'hgover@gmail.com',
-//     project: 'Ample React',
-//     status: 'done',
-//     weeks: '35',
-//     budget: '95K',
-//   },
-// ];
-
 const ProjectTables = () => {
   const [allTheme,setAllTheme] = useState([]);
   const secureApi = useAxiosSecure();
@@ -66,7 +13,7 @@ const ProjectTables = () => {
       setAllTheme(res.data.data);
     });
   }, []);
-  console.log(allTheme);
+  // console.log(allTheme);
 
   return (
     <div>
@@ -77,7 +24,7 @@ const ProjectTables = () => {
             <th className="px-4">Author Name</th>
             {/* <th className="px-4">Email</th> */}
             <th className="px-4">Price</th>
-            <th className="px-4">Review</th>
+            <th className="px-4">Total Review</th>
           </tr>
         </thead>
         <tbody>
@@ -95,7 +42,7 @@ const ProjectTables = () => {
                     />
                     <div className="ms-3">
                       <h5 className="mb-0 fw-medium">{theme?.name}</h5>
-                      <span className="text-muted">{theme?.email}</span>
+                      {/* <span className="text-muted">{theme?.email}</span> */}
                     </div>
                   </div>
                 </td>

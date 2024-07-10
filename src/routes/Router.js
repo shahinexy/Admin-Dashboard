@@ -39,7 +39,7 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
+      { path: '/dashboards/minimal', name: 'Overview', exact: true, element: <Minimal /> },
       { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
       { path: '/test', name: 'Test', exact: true, element: <Test /> },
       { path: '/addTheme', name: 'addTheme', exact: true, element: <PrivateRoutes element={AddProduct}/> },

@@ -96,7 +96,7 @@ const AddProduct = () => {
 
   return (
     <div>
-      <div className="row justify-content-center">
+      <div className="row">
         <h2 className="text-3xl font-bold mb-5 col-7">Upload your Theme</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="col-7">
           <Controller
