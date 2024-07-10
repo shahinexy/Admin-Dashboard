@@ -5,11 +5,15 @@ import PrivateRoutes from './PrivateRoutes';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
 import ListComponent from '../views/ui/ListGroup';
-import BasicTable from '../views/tables/TableBasic';
+// import BasicTable from '../views/tables/TableBasic';
 import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
 import ConditionalRoute from './ConditionalRoute';
 import AddProduct from '../views/ui/AddProduct';
+import UploadImage from '../views/ui/UploadImage';
+import ThemeDetails from '../[ThemeDetails]/page';
+import AllUsers from '../views/AllUsers/AllUsers';
+import BasicTable from '../views/tables/TableBasic';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
@@ -37,9 +41,10 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element:<PrivateRoutes element={Minimal}/>},
-      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <PrivateRoutes element={Shop}/> },
-      { path: '/dashboards/order-list', name: 'Order List', exact: true, element: <PrivateRoutes element={Tables}/> },
+      { path: '/dashboards/minimal', name: 'Overview', exact: true, element: <Minimal /> },
+      { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
+      { path: '/test', name: 'Test', exact: true, element: <Test /> },
+      { path: '/addTheme', name: 'addTheme', exact: true, element: <PrivateRoutes element={AddProduct}/> },
       // { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
       // { path: '/dashboards/demographical', name: 'Demographical', exact: true, element: <Demographical /> },
       // { path: '/dashboards/modern', name: 'Modern', exact: true, element: <Modern /> },
@@ -106,6 +111,36 @@ const ThemeRoutes = [
         name: 'add-theme',
         exact: true,
         element: <AddProduct />,
+      },
+      {
+        path: '/dashboards/order-list',
+        name: 'react-table',
+        exact: true,
+        element: <Tables/>,
+      },
+      {
+        path: '/add-theme/add',
+        name: 'add-theme',
+        exact: true,
+        element: <AddProduct />,
+      },
+      {
+        path: '/upload/image',
+        name: 'upload image',
+        exact: true,
+        element: <UploadImage></UploadImage>
+      },
+      {
+        path: '/theme/details/:id',
+        name: 'theme details',
+        exact: true,
+        element: <ThemeDetails></ThemeDetails>
+      },
+      {
+        path: '/all/users',
+        name: 'all users',
+        exact: true,
+        element: <AllUsers></AllUsers>
       },
       // {
       //   path: '/tables/data-table',

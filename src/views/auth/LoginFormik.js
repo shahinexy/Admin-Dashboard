@@ -10,11 +10,23 @@ import { ReactComponent as LeftBg } from '../../assets/images/bg/login-bgleft.sv
 import { ReactComponent as RightBg } from '../../assets/images/bg/login-bg-right.svg';
 import { useUserContext } from '../../userContext/userContext';
 import shopifyImageBlack from "../../assets/images/logos/shopify logo black.png";
+import usePostMutate from '../../hooks/shared/usePostMutate';
 
 const LoginFormik = () => {
   const navigate = useNavigate();
+  const handleError = (err) => {
+    console.log(err, 'error from login page')
+  }
+  const onSuccess = (data)=> {
+    navigate('/dashboards/minimal');
+    // console.log(data);
+    // console.log(data.data.data.accessToken);
+    Cookies.set('AccessToken', data.data.data.accessToken, { expires: 3600 });
+    console.log(data, "from login page")
+  }
+  const {mutate, isPending, } = usePostMutate('/auth/login',onSuccess, handleError )
   const { email, updateEmail } = useUserContext(); // Accessing email and updateEmail from context
-  // console.log(email);
+
 
   const initialValues = {
     email: '',
@@ -31,28 +43,30 @@ const LoginFormik = () => {
   const handleLogin = async (data) => {
     console.log(data);
 
-    try {
-      const response = await axios.post(
-        'https://theme-store-server.vercel.app/api/v1/auth/login',
-        data,
-      );
+    mutate(data)
 
-      // Handle the response as needed
-      console.log('Login successful:', response.data.data.accessToken);
-      if (response.data.data.accessToken) {
-        Cookies.set('AccessToken', response.data.data.accessToken, { expires: 3600 });
-        updateEmail(data.email); // Update email in context
-        navigate('/dashboards/minimal');
-      }
-      // For example, save the token and redirect
-      localStorage.setItem('token', response.data.token);
-      // Redirect to a protected route
-      // window.location.href = '/dashboard';
-    } catch (error) {
-      // Handle error
-      console.error('Login failed:', error);
-      // setError('Login failed. Please check your credentials and try again.');
-    }
+    // try {
+    //   const response = await axios.post(
+    //     'https://theme-store-server.vercel.app/api/v1/auth/login',
+    //     data,
+    //   );
+
+    //   // Handle the response as needed
+    //   console.log('Login successful:', response.data.data.accessToken);
+    //   if (response.data.data.accessToken) {
+    //     Cookies.set('AccessToken', response.data.data.accessToken, { expires: 3600 });
+    //     updateEmail(data.email); // Update email in context
+    //     navigate('/dashboards/minimal');
+    //   }
+    //   // For example, save the token and redirect
+    //   localStorage.setItem('token', response.data.token);
+    //   // Redirect to a protected route
+    //   // window.location.href = '/dashboard';
+    // } catch (error) {
+    //   // Handle error
+    //   console.error('Login failed:', error);
+    //   // setError('Login failed. Please check your credentials and try again.');
+    // }
   };
 
   return (
@@ -117,8 +131,9 @@ const LoginFormik = () => {
                         </Link>
                       </FormGroup>
                       <FormGroup>
-                        <Button type="submit" color="primary" className="me-2">
-                          Login
+                        <Button  type="submit" color="primary" className="me-2">
+                          {isPending ? 'Logging in' : 'Login'} {isPending} 
+
                         </Button>
                       </FormGroup>
                     </Form>

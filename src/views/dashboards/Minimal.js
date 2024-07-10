@@ -1,16 +1,6 @@
 import { Row, Col } from 'reactstrap';
-import Chat from '../../components/dashboard/minimalDashboard/Chat';
-import Messages from '../../components/dashboard/minimalDashboard/Messages';
-import RecentComments from '../../components/dashboard/minimalDashboard/RecentComments';
 import RevenueCards from '../../components/dashboard/minimalDashboard/RevenueCards';
-import ReviewCard from '../../components/dashboard/minimalDashboard/ReviewCard';
-import Sales from '../../components/dashboard/minimalDashboard/Sales';
-import SalesDifference from '../../components/dashboard/minimalDashboard/SalesDifference';
-import SalesOverview from '../../components/dashboard/minimalDashboard/SalesOverview';
-import TodoList from '../../components/dashboard/minimalDashboard/TodoList';
-import VisitStatistics from '../../components/dashboard/minimalDashboard/VisitStatistics';
-import WeatherCard from '../../components/dashboard/minimalDashboard/WeatherCard';
-import YearlySales from '../../components/dashboard/minimalDashboard/YearlySales';
+
 
 const Minimal = () => {
   return (
