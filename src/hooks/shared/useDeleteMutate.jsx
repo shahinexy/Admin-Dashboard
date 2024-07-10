@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import useAxiosSecure from "../useAxios";
+import useAxiosSecure from "../useSecureApi";
 
 const useDeleteMutate = (route, onSuccess = () => {}, onError = () => {}) => {
   const Axios = useAxiosSecure();
-  const token = Cookies.get("user");
+  const token = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
