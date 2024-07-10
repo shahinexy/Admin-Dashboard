@@ -37,9 +37,6 @@ const ProjectTables = () => {
       <Table className="no-wrap align-middle" responsive borderless>
         <thead>
           <tr>
-            <th className="px-4">Theme</th>
-            <th className="px-4">Description</th>
-
             <th className="px-4">Image</th>
             <th className="px-4">Author Name</th>
             <th className="px-4">Price</th>
@@ -54,24 +51,21 @@ const ProjectTables = () => {
                 <td>
                   <div className="d-flex align-items-center p-2">
                     <img
-                      src={tdata.featuredDesktopImage}
+                      src={theme?.featuredDesktopImage}
+                      className="rounded-4"
                       alt="avatar"
                       width="100"
                       height="80"
                     />
                     <div className="ms-3">
-                      <h5 className="mb-0 fw-medium">{tdata?.name}</h5>
-                      <span className="text-muted">{tdata?.author}</span>
                       <h5 className="mb-0 fw-medium">{theme?.name}</h5>
                     </div>
                   </div>
                 </td>
               </Link>
-              <td>
-                {tdata?.description.slice(0, 60)}...
-              </td>
-              <td>{tdata?.price}</td>
-              <td>20</td>
+              <td>{theme?.author}</td>
+              <td>{theme?.price}</td>
+              <td>{theme?.review?.length}</td>
             </tr>
           ))}
         </tbody>
