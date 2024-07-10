@@ -8,7 +8,7 @@ const ThemeDetails = () => {
     console.log(id, "id from page themeDetails");
     return (
         <div>
-            <ShopDetail id={id}></ShopDetail>
+            <ShopDetail themId={id}></ShopDetail>
         </div>
     );
 };
