@@ -5,7 +5,7 @@ import PrivateRoutes from './PrivateRoutes';
 import Loadable from '../layouts/loader/Loadable';
 import Test from '../views/Test';
 import ListComponent from '../views/ui/ListGroup';
-import BasicTable from '../views/tables/TableBasic';
+// import BasicTable from '../views/tables/TableBasic';
 import Tables from '../views/ui/Tables';
 import CustomReactTable from '../views/tables/CustomReactTable';
 import ConditionalRoute from './ConditionalRoute';
@@ -13,6 +13,7 @@ import AddProduct from '../views/ui/AddProduct';
 import UploadImage from '../views/ui/UploadImage';
 import ThemeDetails from '../[ThemeDetails]/page';
 import AllUsers from '../views/AllUsers/AllUsers';
+import BasicTable from '../views/tables/TableBasic';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
@@ -131,7 +132,7 @@ const ThemeRoutes = [
       },
       {
         path: '/theme/details/:id',
-        name: 'upload image',
+        name: 'theme details',
         exact: true,
         element: <ThemeDetails></ThemeDetails>
       },
