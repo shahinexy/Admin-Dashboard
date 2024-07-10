@@ -1,12 +1,36 @@
-import React, { useRef, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useRef, useState } from 'react';
+import Cookies from 'js-cookie';
 import { Button, Input, Label } from 'reactstrap';
 import 'react-quill/dist/quill.snow.css';
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useSecureApi';
+import usePostMutate from '../../hooks/shared/usePostMutate';
+import UploadImage from './UploadImage';
 
 const AddProduct = () => {
-  const axiosSecure = useAxiosSecure()
+  const [user, setUser] = useState({});
+  const cookieValue = Cookies.get('AccessToken');
+  const [desktopImageUrl, setDesktopImageUrl] = useState('');
+  const [phoneImageUrl, setPhoneImageUrl] = useState('');
+  const onSuccess = (response) => {
+    console.log('Success:', response);
+  };
+  const onError = (error) => {
+    console.error('Error:', error);
+  };
+
+  useEffect(() => {
+    if (cookieValue) {
+      console.log(cookieValue);
+      const decoded = jwtDecode(cookieValue);
+      console.log(decoded);
+      setUser(decoded);
+    }
+  }, [cookieValue]);
+
+  const { mutate, isPending } = usePostMutate('/themes', onSuccess, onError);
   const {
     register,
     handleSubmit,
@@ -45,14 +69,15 @@ const AddProduct = () => {
   };
   // on form submit
   const onSubmit = async (data) => {
-    // https://theme-store-server.vercel.app/api/v1/themes
-    const { includesSupport, categories, featuredDesktopImage, featuredPhoneImage, ...rest } = data;
+    const { includeSupport, categories, ...rest } = data;
 
-    const supports = includesSupport.split(',');
+    // console.log(desktopImageUrl);
+
+    const supports = includeSupport.split(',');
     const allCategory = categories.split(',');
 
-    const desktopImage = data.featuredDesktopImage;
-    const phoneImage = data.featuredPhoneImage;
+    const desktopImage = desktopImageUrl;
+    const phoneImage = phoneImageUrl;
 
     const featuredDesktopImageUrl = await uploadImage(desktopImage);
     const featuredPhoneImageUrl = await uploadImage(phoneImage);
@@ -61,42 +86,19 @@ const AddProduct = () => {
       ...rest,
       featuredDesktopImage: featuredDesktopImageUrl,
       featuredPhoneImage: featuredPhoneImageUrl,
-      includesSupport: supports,
+      includeSupport: supports,
       categories: allCategory,
+      createdBy: user.id,
     };
-
-    try {
-      const response = await axiosSecure.post('/themes', allData);
-      console.log(response.data);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.error('Unauthorized: Please check your authentication token.');
-      } else {
-        console.error(error);
-      }
-    }
-
+    mutate(allData);
+    console.log(allData);
   };
 
-  // get img file value
-  const featuredDesktopImage = useRef(null);
-  const featuredPhoneImage = useRef(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setValue('featuredDesktopImage', file);
-    console.log('Selected file:', file);
-  };
-
-  const handlePhoneImg = (event) => {
-    const file = event.target.files[0];
-    setValue('featuredPhoneImage', file);
-    console.log('Selected file:', file);
-  };
 
   return (
     <div>
-      <div className="row">
+      <div className="row justify-content-center">
         <h2 className="text-3xl font-bold mb-5 col-7">Upload your Theme</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="col-7">
           <Controller
@@ -110,23 +112,11 @@ const AddProduct = () => {
               </div>
             )}
           />
+          <p>Desktop Image</p>
+          <UploadImage setImageUrl={setDesktopImageUrl} />
 
-          <Label for="themeName" className="mb-2">
-            {' '}
-            Desktop Image
-          </Label>
-          <Input
-            ref={featuredDesktopImage}
-            type="file"
-            onChange={handleFileChange}
-            className="mb-2"
-          />
-
-          <Label for="themeName" className="mb-2">
-            {' '}
-            Phone Image
-          </Label>
-          <Input ref={featuredPhoneImage} type="file" onChange={handlePhoneImg} className="mb-2" />
+          <p>Phone Image</p>
+          <UploadImage setImageUrl={setPhoneImageUrl} />
 
           <Controller
             name="categories"
@@ -165,12 +155,24 @@ const AddProduct = () => {
           />
 
           <Controller
-            name="includesSupport"
+            name="includeSupport"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <div className="mb-3">
                 <Label for="themePrice">Includes Support</Label>
+                <Input {...field} placeholder="Give theme support" type="text" />
+              </div>
+            )}
+          />
+
+          <Controller
+            name="author"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <div className="mb-3">
+                <Label for="themePrice">Author</Label>
                 <Input {...field} placeholder="Give theme support" type="text" />
               </div>
             )}

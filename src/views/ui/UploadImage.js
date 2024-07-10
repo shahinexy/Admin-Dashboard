@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-// import './style.css';
+import './style.css';
 
-const ImageUploader = () => {
+/* eslint react/prop-types: 0 */
+const UploadImage = ({setImageUrl}) => {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const fileInput = useRef(null);
@@ -9,6 +10,8 @@ const ImageUploader = () => {
     //you can carry out any file validations here...
     setImage(file);
     setPreviewUrl(URL.createObjectURL(file));
+    console.log(file, "here")
+    setImageUrl(file)
   };
 
   const handleOndragOver = (event) => {
@@ -21,11 +24,12 @@ const ImageUploader = () => {
     //let's grab the image file
     const imageFile = event.dataTransfer.files[0];
     handleFile(imageFile);
+    // console.log(imageFile, "here")
   };
   return (
-    <div className="flex flex-column">
+    <div className="d-flex justify-content-between gap-5">
       <div
-        className="drop_zone"
+        className={`${image?'drop_zone col-8':'drop_zone col-12'}`}
         onDragOver={handleOndragOver}
         onDrop={handleOndrop}
         onClick={() => fileInput.current.click()}
@@ -39,15 +43,14 @@ const ImageUploader = () => {
           onChange={(e) => handleFile(e.target.files[0])}
         />
       </div>
-      <div>
+      <div className={`${image?'col-4':''}`}>
         {previewUrl && (
-          <div className="image">
-            <img src={previewUrl} className="w-25 h-25" alt="img" />
-            <span> {image.name} </span>
+          <div className="">
+            <img src={previewUrl} className="img-fluid h-25 w-50" alt="img" />
           </div>
         )}
       </div>
     </div>
   );
 };
-export default ImageUploader;
+export default UploadImage;
