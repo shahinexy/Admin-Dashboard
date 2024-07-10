@@ -27,12 +27,7 @@ const BasicTable = () => {
       {/* Start Inner Div*/}
       {/*--------------------------------------------------------------------------------*/}
       <ComponentCard
-        title="All Product"
-        subtitle={
-          <p>
-            All products are here.
-          </p>
-        }
+        title="All themes"
       >
         <ProjectTables />
       </ComponentCard>

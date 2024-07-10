@@ -130,7 +130,7 @@ const ThemeRoutes = [
       },
       {
         path: '/theme/details/:id',
-        name: 'upload image',
+        name: 'theme details',
         exact: true,
         element: <ThemeDetails></ThemeDetails>
       },
