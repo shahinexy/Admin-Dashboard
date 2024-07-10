@@ -5,26 +5,29 @@ import {
   Card,
   CardBody,
   Badge,
-  Label,
-  FormGroup,
   Button,
-  Input,
 } from 'reactstrap';
 
 import useFetchQuery from '../../../hooks/shared/useFetch';
+import useDeleteMutate from '../../../hooks/shared/useDeleteMutate';
 
 /* eslint react/prop-types: 0 */
 
 const ShopDetail = ({ themId }) => {
   const [themeData, setThemeData] = useState([]);
-  // console.log(themId);
-  const { data, isLoading } = useFetchQuery(`/themes/${themId}`);
-  // console.log(data?.data);
+  const { data, isLoading, refetch } = useFetchQuery(`/themes/${themId}`);
+  const onSuccess = (id) => {
+    refetch();
+  }
+  const {mutate, isPending} = useDeleteMutate(`/themes/`, onSuccess);
   useEffect(() => {
     if (data?.data) setThemeData(data?.data);
   }, [data]);
 
-  console.log(themeData);
+  const handleDelete = (id) => {
+    // console.log(id)
+    mutate(id);
+  }
 
   return (
     <div>
@@ -34,8 +37,8 @@ const ShopDetail = ({ themId }) => {
           <Card>
             <CardBody>
               <Row>
-                <Col lg="6">
-                  <img className='img-fluid h-100' src={themeData?.featuredDesktopImage} alt="desktop" width="" />
+                <Col lg="6 ">
+                  <img className='img-fluid ' src={themeData?.featuredDesktopImage} alt="desktop" width="" />
                 </Col>
                 <Col lg="6">
                   <Badge color="success">{themeData?.author}</Badge>
@@ -56,9 +59,9 @@ const ShopDetail = ({ themId }) => {
                   <br />
                   <br />
                   <Button color="primary" className="me-2">
-                    Buy Now
+                    Update
                   </Button>
-                  <Button color="dark">Add to Cart</Button>
+                  <Button onClick={() => handleDelete(themeData.id)} color="dark">Delete</Button>
                 </Col>
               </Row>
             </CardBody>

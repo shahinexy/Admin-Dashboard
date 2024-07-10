@@ -37,10 +37,9 @@ const ProjectTables = () => {
       <Table className="no-wrap align-middle" responsive borderless>
         <thead>
           <tr>
-            <th className="px-4">Image</th>
-            <th className="px-4">Author Name</th>
+            <th className="px-4">Theme</th>
+            <th className="px-4">Description</th>
             <th className="px-4">Price</th>
-            <th className="px-4">Review</th>
             <th className="px-4">Total Sale</th>
           </tr>
         </thead>
@@ -52,24 +51,25 @@ const ProjectTables = () => {
                   <div className="d-flex align-items-center p-2">
                     <img
                       src={theme?.featuredDesktopImage}
-                      className="rounded-4"
                       alt="avatar"
                       width="100"
                       height="80"
                     />
                     <div className="ms-3">
                       <h5 className="mb-0 fw-medium">{theme?.name}</h5>
+                      <p className=' text-black mt-1'>{theme?.author}</p>
                     </div>
                   </div>
                 </td>
               </Link>
-              <td>{theme?.author}</td>
+              <td>{theme?.description.slice(0,70)}...</td>
               <td>{theme?.price}</td>
-              <td>{theme?.review?.length}</td>
+              <td>20</td>
             </tr>
           ))}
         </tbody>
       </Table>
+
       <div className="d-flex justify-content-between">
         <div className="d-flex justify-content-between mt-4 gap-4">
           <button
