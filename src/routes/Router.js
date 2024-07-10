@@ -12,6 +12,7 @@ import ConditionalRoute from './ConditionalRoute';
 import AddProduct from '../views/ui/AddProduct';
 import UploadImage from '../views/ui/UploadImage';
 import ThemeDetails from '../[ThemeDetails]/page';
+import AllUsers from '../views/AllUsers/AllUsers';
 // import FormGrids from '../views/form-layouts/FormGrid';
 /****Layouts*****/
 const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
@@ -39,7 +40,7 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
+      { path: '/dashboards/minimal', name: 'Overview', exact: true, element: <Minimal /> },
       { path: '/dashboards/shop', name: 'Shop', exact: true, element: <Shop /> },
       { path: '/test', name: 'Test', exact: true, element: <Test /> },
       { path: '/addTheme', name: 'addTheme', exact: true, element: <PrivateRoutes element={AddProduct}/> },
@@ -133,6 +134,12 @@ const ThemeRoutes = [
         name: 'theme details',
         exact: true,
         element: <ThemeDetails></ThemeDetails>
+      },
+      {
+        path: '/all/users',
+        name: 'all users',
+        exact: true,
+        element: <AllUsers></AllUsers>
       },
       // {
       //   path: '/tables/data-table',

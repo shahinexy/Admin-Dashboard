@@ -70,4 +70,6 @@ const ShopDetail = ({ themId }) => {
   );
 };
 
+
+
 export default ShopDetail;

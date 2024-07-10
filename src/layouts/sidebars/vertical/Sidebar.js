@@ -42,7 +42,7 @@ const Sidebar = () => {
     const userData = await axios.get('https://theme-store-server.vercel.app/api/v1/users');
     setUsers(userData?.data?.data);
   },[])
-  console.log(users);
+  // console.log(users);
 
   const userInfo = users.filter(user=>user?.email === email);
   console.log(userInfo);
