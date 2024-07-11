@@ -18,7 +18,7 @@ const FullLayout = () => {
   const location = useLocation();
   const getTitle = location.pathname.split('/')[2];
 
-  console.log(getTitle);
+  // console.log(getTitle);
 
   return (
     <main>

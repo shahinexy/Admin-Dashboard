@@ -16,14 +16,13 @@
     }
   },
   "extends": [
-    "airbnb",
-    "prettier",
+
     
   ],
   "plugins": [
-    "prettier",
-    "react",
-    "react-hooks"
+
+    "react"
+
   ],
   "parser": "",
   "rules": {

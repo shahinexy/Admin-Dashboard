@@ -16,7 +16,7 @@ const App = () => {
   const routing = useRoutes(Themeroutes);
   const direction = useSelector((state) => state.customizer.isRTL);
   const isMode = useSelector((state) => state.customizer.isDark);
-  console.log(process.env.REACT_APP_CLOUD_NAME)
+  // console.log(process.env.REACT_APP_CLOUD_NAME)
 
   return (
     <UserProvider>
