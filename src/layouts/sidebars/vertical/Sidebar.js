@@ -27,7 +27,7 @@ const Sidebar = () => {
   const currentURL = location.pathname.split('/').slice(0, -1).join('/');
   const [users,setUsers] = useState([]);
   const { email, updateEmail } = useUserContext();
-  console.log(email);
+  // console.log(email);
 
   //const [collapsed, setCollapsed] = useState(null);
   // const toggle = (index) => {
@@ -45,7 +45,7 @@ const Sidebar = () => {
   // console.log(users);
 
   const userInfo = users.filter(user=>user?.email === email);
-  console.log(userInfo);
+  // console.log(userInfo);
   // users.forEach(user=>{
   //   console.log(user?.email);
   // })

@@ -4,7 +4,7 @@ import useAxiosSecure from "../useSecureApi";
 
 const useUpdateMutate = (route, onSuccess = () => {}, onError = () => {}) => {
   const Axios = useAxiosSecure();
-  const token = Cookies.get("user");
+  const token = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({

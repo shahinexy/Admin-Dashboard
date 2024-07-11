@@ -8,12 +8,12 @@ const useUpdateMutateWithID = (
   onError = () => {}
 ) => {
   const Axios = useAxiosSecure();
-  const token = Cookies.get("user");
+  const token = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (obj) =>
-      Axios.patch(route + obj.id, obj, {
+      Axios.patch(route, obj, {
         headers: {
           Authorization: token,
         },

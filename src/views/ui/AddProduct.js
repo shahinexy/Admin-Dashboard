@@ -8,12 +8,14 @@ import axios from 'axios';
 import useAxiosSecure from '../../hooks/useSecureApi';
 import usePostMutate from '../../hooks/shared/usePostMutate';
 import UploadImage from './UploadImage';
+import DemoStoreInput from './Demostores';
 
 const AddProduct = () => {
   const [user, setUser] = useState({});
   const cookieValue = Cookies.get('AccessToken');
   const [desktopImageUrl, setDesktopImageUrl] = useState('');
   const [phoneImageUrl, setPhoneImageUrl] = useState('');
+  const [stores, setStores] = useState([]);
   const onSuccess = (response) => {
     console.log('Success:', response);
   };
@@ -31,10 +33,9 @@ const AddProduct = () => {
   }, [cookieValue]);
 
   const { mutate, isPending } = usePostMutate('/themes', onSuccess, onError);
+  
   const {
-    register,
     handleSubmit,
-    watch,
     control,
     setValue,
     formState: { errors },
@@ -89,12 +90,11 @@ const AddProduct = () => {
       includeSupport: supports,
       categories: allCategory,
       createdBy: user.id,
+      demoStores: stores
     };
     mutate(allData);
     console.log(allData);
   };
-
-
 
   return (
     <div>
@@ -153,6 +153,9 @@ const AddProduct = () => {
               </div>
             )}
           />
+
+          {/* // ===== Demo Store ===== */}
+          <DemoStoreInput stores={stores} setStores={setStores} />
 
           <Controller
             name="includeSupport"
